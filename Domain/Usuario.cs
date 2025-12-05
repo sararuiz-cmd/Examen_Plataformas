@@ -1,10 +1,8 @@
-﻿using System;
-
-public class Class1
+namespace CollabSecure.Domain
 {
-	public Class1()
+	public class Usuario
 	{
-	  public string Nombre { get; set; }
-	  public string contraseña { get; set; }
-    }
+		public string Nombre { get; set; }
+		public string Contrasena { get; set; }
+	}
 }

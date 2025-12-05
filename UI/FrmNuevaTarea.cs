@@ -1,8 +1,10 @@
-﻿using CollabSecure.Data;
+﻿using System;
+using System.Windows.Forms;
+using CollabSecure.Data;
 using CollabSecure.Domain;
 using CollabSecure.Security;
-using System;
-using System.Windows.Forms;
+
+
 
 namespace CollabSecure.UI
 {
@@ -20,29 +22,40 @@ namespace CollabSecure.UI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string texto = txtContenido.Text;
+            string texto = txtContenido.Text.Trim();
 
+            // Validaciones básicas
             if (!ValidationService.ValidarTexto(texto))
             {
-                MessageBox.Show("Texto inválido o demasiado largo.");
+                MessageBox.Show("El texto no puede ser vacío ni mayor a 200 caracteres.");
                 return;
             }
 
+            // Filtro de lenguaje ofensivo
             if (ContentFilter.ContieneContenidoOfensivo(texto))
             {
                 MessageBox.Show("El mensaje contiene lenguaje ofensivo.");
                 return;
             }
 
-            repo.Guardar(new Tarea
+            // Crear tarea
+            Tarea tarea = new Tarea
             {
                 Autor = autor,
                 Contenido = texto,
                 Fecha = DateTime.Now
-            });
+            };
 
-            MessageBox.Show("Tarea registrada.");
-            Close();
+            // Guardar en TXT
+            repo.Guardar(tarea);
+
+            MessageBox.Show("Tarea guardada correctamente.");
+            this.Close();
+        }
+
+        private void txtContenido_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

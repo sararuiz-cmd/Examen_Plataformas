@@ -33,5 +33,10 @@ namespace CollabSecure.UI
             form.FormClosed += (s, a) => CargarTareas();
             form.ShowDialog();
         }
+
+        private void dgvTareas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

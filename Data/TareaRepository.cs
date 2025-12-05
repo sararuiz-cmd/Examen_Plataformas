@@ -1,55 +1,42 @@
-﻿using CollabSecure.Domain;
-
+using System;
 using System.Collections.Generic;
-
 using System.IO;
-
-using System.Text.Json;
-
-
+using CollabSecure.Domain;
 
 namespace CollabSecure.Data
-
 {
-
     public class TareaRepository
-
     {
-
-        private string ruta = "tareas.json";
-
-
+        private string ruta = "tareas.txt";
 
         public void Guardar(Tarea tarea)
-
         {
-
-            var lista = Cargar();
-
-            lista.Add(tarea);
-
-            File.WriteAllText(ruta, JsonSerializer.Serialize(lista));
-
+            string linea = $"{tarea.Autor}|{tarea.Contenido}|{tarea.Fecha}";
+            File.AppendAllLines(ruta, new[] { linea });
         }
-
-
 
         public List<Tarea> Cargar()
-
         {
+            var lista = new List<Tarea>();
 
             if (!File.Exists(ruta))
+                return lista;
 
-                return new List<Tarea>();
+            foreach (var linea in File.ReadAllLines(ruta))
+            {
+                var partes = linea.Split('|');
+                if (partes.Length == 3)
+                {
+                    lista.Add(new Tarea
+                    {
+                        Autor = partes[0],
+                        Contenido = partes[1],
+                        Fecha = DateTime.Parse(partes[2])
+                    });
+                }
+            }
 
-
-
-            string json = File.ReadAllText(ruta);
-
-            return JsonSerializer.Deserialize<List<Tarea>>(json);
-
+            return lista;
         }
-
     }
-
 }

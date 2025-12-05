@@ -1,8 +1,11 @@
-﻿using System;
-
-public class Class1
+namespace CollabSecure.Security
 {
-	public Class1()
+	public static class ValidationService
 	{
+		public static bool ValidarTexto(string texto)
+		{
+			return !string.IsNullOrWhiteSpace(texto)
+				&& texto.Length <= 200;
+		}
 	}
 }

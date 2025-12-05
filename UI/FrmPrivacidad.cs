@@ -19,5 +19,10 @@ namespace CollabSecure.UI
                 "No se comparte con terceros.\n" +
                 "Al continuar, usted acepta este uso responsable.";
         }
+
+        private void txtPolitica_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
