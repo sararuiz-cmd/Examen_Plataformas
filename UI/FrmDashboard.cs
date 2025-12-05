@@ -3,6 +3,11 @@ using CollabSecure.Domain;
 using System;
 using System.Windows.Forms;
 
+using CollabSecure.Data;
+using CollabSecure.Domain;
+using System;
+using System.Windows.Forms;
+
 namespace CollabSecure.UI
 {
     public partial class FrmDashboard : Form
@@ -18,8 +23,10 @@ namespace CollabSecure.UI
 
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
+            lblUsuarioValor.Text = usuario;
             CargarTareas();
         }
+
 
         private void CargarTareas()
         {
@@ -33,10 +40,10 @@ namespace CollabSecure.UI
             form.FormClosed += (s, a) => CargarTareas();
             form.ShowDialog();
         }
-
         private void dgvTareas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            // Método requerido por el diseñador. Puedes dejarlo vacío.
         }
+
     }
 }

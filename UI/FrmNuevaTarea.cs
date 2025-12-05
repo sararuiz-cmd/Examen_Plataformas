@@ -57,5 +57,10 @@ namespace CollabSecure.UI
         {
 
         }
+
+        private void FrmNuevaTarea_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
